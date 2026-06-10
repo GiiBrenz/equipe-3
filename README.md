@@ -43,6 +43,6 @@ promtrim/
 
 
 ```
-Notion: https://organic-trouble-2b4.notion.site/Lapida-o-de-Prompt-37b791c07832805ea5f4c509a2302c60?pvs=74
+Notion: https://organic-trouble-2b4.notion.site/PromTrim-37b791c078328027848ac69ce9a1ecce
 
 
