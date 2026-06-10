@@ -1,7 +1,7 @@
-// Lógica do Painel de Controle de Intenções (PromTrim)
+// LÃ³gica do Painel de Controle de IntenÃ§Ãµes (PromTrim)
 
 document.addEventListener("DOMContentLoaded", () => {
-    // Inicializa os ícones do Lucide
+    // Inicializa os Ã­cones do Lucide
     lucide.createIcons();
 
     // Seletores DOM
@@ -18,15 +18,15 @@ document.addEventListener("DOMContentLoaded", () => {
     const resultTitleText = document.getElementById("result-title-text");
     const copyBtn = document.getElementById("copy-btn");
 
-    // Variável para armazenar a resposta bruta para a cópia
+    // VariÃ¡vel para armazenar a resposta bruta para a cÃ³pia
     let respostaBruta = "";
 
-    // Mapeamento dos títulos baseados na intenção para melhorar a experiência
+    // Mapeamento dos tÃ­tulos baseados na intenÃ§Ã£o para melhorar a experiÃªncia
     const titulosIntencao = {
-        apenas_codigo: "Código Limpo Implementado",
-        explicacao: "Análise Teórica & Arquitetura",
-        bibliotecas: "Recomendações de Ecossistema",
-        seguranca: "Relatório de Segurança & Bugs"
+        apenas_codigo: "CÃ³digo Limpo Implementado",
+        explicacao: "AnÃ¡lise TeÃ³rica & Arquitetura",
+        bibliotecas: "RecomendaÃ§Ãµes de Ecossistema",
+        seguranca: "RelatÃ³rio de SeguranÃ§a & Bugs"
     };
 
     // Contador de Caracteres no Textarea
@@ -35,22 +35,22 @@ document.addEventListener("DOMContentLoaded", () => {
         charCountLabel.textContent = `${count} caractere${count !== 1 ? 's' : ''}`;
     });
 
-    // Envio do formulário
+    // Envio do formulÃ¡rio
     intentForm.addEventListener("submit", async (e) => {
         e.preventDefault();
 
         const ideia = ideiaTextarea.value.trim();
-        // Obtém o valor do radio selecionado
+        // ObtÃ©m o valor do radio selecionado
         const tipoRadio = document.querySelector('input[name="tipo"]:checked');
         const tipo = tipoRadio ? tipoRadio.value : "apenas_codigo";
 
         if (!ideia) return;
 
-        // 1. Alterar o estado do botão de ação
+        // 1. Alterar o estado do botÃ£o de aÃ§Ã£o
         gerarBtn.disabled = true;
         btnText.textContent = "Lapidando Resposta...";
         btnIcon.innerHTML = `<i data-lucide="loader-2" class="spin-animation"></i>`;
-        lucide.createIcons({ attrs: { class: ["spin-animation"] } });
+        lucide.createIcons();
 
         // 2. Exibir o painel de resultados e ativar o loader
         resultadoPainel.classList.remove("hidden");
@@ -58,14 +58,14 @@ document.addEventListener("DOMContentLoaded", () => {
         resultContent.classList.add("hidden");
         resultContent.innerHTML = "";
         
-        // Ajustar título dinâmico com base na intenção selecionada
+        // Ajustar tÃ­tulo dinÃ¢mico com base na intenÃ§Ã£o selecionada
         resultTitleText.textContent = titulosIntencao[tipo] || "Resposta Lapidada";
 
-        // Scroll suave até o painel de resultado
+        // Scroll suave atÃ© o painel de resultado
         resultadoPainel.scrollIntoView({ behavior: "smooth", block: "start" });
 
         try {
-            // Chamada à API no Flask
+            // Chamada Ã  API no Flask
             const response = await fetch("/api/lapidar", {
                 method: "POST",
                 headers: {
@@ -92,13 +92,13 @@ document.addEventListener("DOMContentLoaded", () => {
             const htmlRenderizado = marked.parse(respostaBruta);
             resultContent.innerHTML = htmlRenderizado;
 
-            // Executa o syntax highlighting do PrismJS em blocos de código renderizados
+            // Executa o syntax highlighting do PrismJS em blocos de cÃ³digo renderizados
             Prism.highlightAllUnder(resultContent);
 
-            // Re-inicializa possíveis ícones criados dinamicamente no markdown
+            // Re-inicializa possÃ­veis Ã­cones criados dinamicamente no markdown
             lucide.createIcons();
             
-            // Oculta loader e exibe conteúdo
+            // Oculta loader e exibe conteÃºdo
             resultLoader.classList.add("hidden");
             resultContent.classList.remove("hidden");
 
@@ -108,7 +108,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 <div class="error-banner">
                     <i data-lucide="alert-triangle"></i>
                     <div>
-                        <strong>Erro ao processar requisição:</strong>
+                        <strong>Erro ao processar requisiÃ§Ã£o:</strong>
                         <p>${erro.message}</p>
                     </div>
                 </div>
@@ -117,7 +117,7 @@ document.addEventListener("DOMContentLoaded", () => {
             resultLoader.classList.add("hidden");
             resultContent.classList.remove("hidden");
         } finally {
-            // Restaura estado inicial do botão
+            // Restaura estado inicial do botÃ£o
             gerarBtn.disabled = false;
             btnText.textContent = "Gerar Resposta Lapidada";
             btnIcon.innerHTML = `<i data-lucide="sparkles"></i>`;
@@ -146,7 +146,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-// Estilos dinâmicos de animação de rotação via JS se necessário
+// Estilos dinÃ¢micos de animaÃ§Ã£o de rotaÃ§Ã£o via JS se necessÃ¡rio
 const styleSheet = document.createElement("style");
 styleSheet.innerText = `
     .spin-animation {
